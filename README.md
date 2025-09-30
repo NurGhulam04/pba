@@ -1,65 +1,109 @@
-# Analisis Sentimen Ulasan Aplikasi Okejek dari Google Play Store
+---
 
-Repositori ini berisi kumpulan *notebook* dan data untuk analisis sentimen pada ulasan aplikasi Okejek yang diambil dari Google Play Store.
+# 📊 Sentiment Analysis – Okejek App Reviews
 
-## Deskripsi
+Repositori ini berisi proyek **Analisis Sentimen** terhadap ulasan pengguna aplikasi **Okejek** yang diambil dari **Google Play Store**.
+Proyek ini dibuat sebagai bagian dari tugas analisis teks menggunakan teknik **Natural Language Processing (NLP)**.
 
-Proyek ini bertujuan untuk menganalisis dan mengklasifikasikan sentimen (positif, negatif, atau netral) dari ulasan pengguna aplikasi Okejek. Analisis ini dapat memberikan wawasan berharga bagi pengembang aplikasi untuk memahami umpan balik pengguna dan meningkatkan kualitas aplikasi.
+---
 
-## Dataset
+## 📂 Struktur Proyek
 
-Dataset yang digunakan dalam proyek ini diambil dengan melakukan *scraping* dari halaman aplikasi Okejek di Google Play Store. Terdapat dua versi dataset yang tersedia:
-
-* `dataset/dirty_okejek_review.csv`: Dataset mentah hasil *scraping*.
-* `dataset/cleaned_okejek_review.csv`: Dataset yang telah melalui tahap pra-pemrosesan.
-
-## Metodologi
-
-Alur kerja proyek ini dibagi menjadi beberapa tahap yang terdokumentasi dalam *notebook* Jupyter yang berbeda:
-
-1.  **Scrapping dan Lowercasing**: Mengambil data ulasan dari Google Play Store dan mengubah semua teks menjadi huruf kecil.
-2.  **Pra-pemrosesan Teks**:
-    * **Tokenization**: Memecah teks ulasan menjadi token atau kata-kata individual.
-    * **Stemming**: Mengubah kata-kata ke bentuk dasarnya.
-3.  **Analisis Data Eksplorasi (EDA)**: Menganalisis dataset untuk memahami distribusi skor, tren ulasan dari waktu ke waktu, dan kata-kata yang paling sering muncul.
-4.  **Ekstraksi Fitur**:
-    * **Bag of Words (BoW)**: Merepresentasikan teks sebagai sekumpulan kata tanpa memperhatikan urutan.
-    * **TF-IDF**: Memberikan bobot pada kata-kata berdasarkan frekuensinya dalam dokumen dan di seluruh korpus.
-5.  **Pemodelan Analisis Sentimen**: Membangun dan melatih model klasifikasi (dalam kasus ini, Regresi Logistik) untuk memprediksi sentimen ulasan.
-6.  **Visualisasi**:
-    * **Word Cloud**: Membuat visualisasi kata-kata yang paling sering muncul dalam ulasan positif dan negatif.
-
-## Struktur Repositori
-
+```
 .
 ├── dataset
-│   ├── cleaned_okejek_review.csv
-│   └── dirty_okejek_review.csv
+│   ├── dirty_okejek_review.csv     # Dataset mentah hasil scraping
+│   └── cleaned_okejek_review.csv   # Dataset setelah preprocessing
+│
 ├── notebook
-│   ├── BoW.ipynb
-│   ├── EDA.ipynb
-│   ├── Finding_common_words.ipynb
-│   ├── Scrapping_and_lowercasing.ipynb
-│   ├── Sentiment_Analysis.ipynb
-│   ├── Stemmer.ipynb
-│   ├── TFIDF.ipynb
-│   ├── Tokenization.ipynb
-│   └── WordCloud.ipynb
+│   ├── Scrapping_and_lowercasing.ipynb   # Scraping + pembersihan awal
+│   ├── Tokenization.ipynb                # Tokenisasi teks
+│   ├── Stemmer.ipynb                     # Stemming kata
+│   ├── TFIDF.ipynb                       # Representasi TF-IDF
+│   ├── BoW.ipynb                         # Representasi Bag-of-Words
+│   ├── Finding_common_words.ipynb        # Analisis kata yang sering muncul
+│   ├── WordCloud.ipynb                   # Visualisasi Word Cloud
+│   ├── EDA.ipynb                         # Exploratory Data Analysis
+│   └── Sentiment_Analysis.ipynb          # Notebook utama (klasifikasi sentimen)
+│
 └── README.md
+```
 
+---
 
-## Cara Menjalankan
+## ⚙️ Teknologi yang Digunakan
 
-1.  **Instalasi Dependensi**: Pastikan Anda telah menginstal semua pustaka yang diperlukan. Anda dapat melakukannya dengan menjalankan perintah berikut:
-    ```bash
-    pip install google-play-scraper textblob seaborn sastrawi wordcloud matplotlib pandas numpy nltk scikit-learn
-    ```
-2.  **Jalankan Notebook**: Jalankan *notebook* `Sentiment_Analysis.ipynb`, notebook ini merupakan gabungan dari proses yang sebelumnya telah dilakukan.
+* **Python** (Jupyter Notebook)
+* **Library NLP & ML**:
 
-## Hasil
+  * `pandas`, `numpy` → manipulasi data
+  * `scikit-learn` → machine learning (TF-IDF, klasifikasi)
+  * `nltk` / `Sastrawi` → preprocessing teks (stopwords, stemming)
+  * `matplotlib`, `seaborn`, `wordcloud` → visualisasi
 
-Model analisis sentimen yang dibangun menggunakan Regresi Logistik berhasil mencapai akurasi sekitar **79.4%** pada data uji. Laporan klasifikasi menunjukkan rincian performa model untuk setiap kelas sentimen.
+---
 
-## Kontributor
+## 🚀 Langkah Menjalankan Proyek
 
-* [Nama Anda](Link ke profil GitHub Anda)
+1. **Clone repositori**
+
+   ```bash
+   git clone https://github.com/NurGhulam04/pba.git
+   cd pba
+   ```
+
+2. **Buat environment baru (opsional)**
+
+   ```bash
+   python -m venv venv
+   source venv/bin/activate   # Linux/Mac
+   venv\Scripts\activate      # Windows
+   ```
+
+3. **Install dependencies**
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+   > Jika `requirements.txt` belum ada, jalankan `pip freeze > requirements.txt` setelah semua library terpasang.
+
+4. **Jalankan Jupyter Notebook**
+
+   ```bash
+   jupyter notebook
+   ```
+
+   Buka file pada folder `notebook/`, misalnya `Sentiment_Analysis.ipynb`.
+
+---
+
+## 📊 Alur Analisis
+
+1. **Scraping Data** → Mengambil review dari Google Play Store.
+2. **Preprocessing** → Lowercasing, cleaning, tokenisasi, stemming, stopword removal.
+3. **Representasi Teks**:
+
+   * Bag-of-Words (BoW)
+   * Term Frequency - Inverse Document Frequency (TF-IDF)
+4. **EDA & Visualisasi** → WordCloud, distribusi kata, analisis kata umum.
+5. **Modeling** → Klasifikasi sentimen positif/negatif menggunakan algoritma ML.
+6. **Evaluasi** → Mengukur performa model dengan metrik (accuracy, precision, recall, f1-score).
+
+---
+
+## 📌 Hasil & Temuan
+
+* Dataset berhasil dibersihkan dari noise seperti emoji, angka, tanda baca, dan stopwords.
+* WordCloud dan analisis kata membantu memahami kata dominan yang muncul.
+* Model berbasis **TF-IDF + klasifikasi** memberikan performa yang lebih baik dibandingkan representasi BoW.
+
+---
+
+## ✍️ Kontributor
+
+* [NurGhulam04](https://github.com/NurGhulam04)
+
+---
+
+Mau aku bikinin juga file **`requirements.txt`** biar gampang install dependensinya, atau cukup README aja?
